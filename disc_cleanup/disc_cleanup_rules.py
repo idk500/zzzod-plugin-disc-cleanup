@@ -86,7 +86,8 @@ class DiscRules:
             return
         try:
             from one_dragon.utils import yaml_utils
-            data = yaml_utils.load(path)
+            with open(path, encoding='utf-8') as f:
+                data = yaml_utils.safe_load(f)
             if not isinstance(data, dict):
                 return
             for k, v in (data.get('set_type') or {}).items():
