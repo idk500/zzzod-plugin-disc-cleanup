@@ -15,7 +15,6 @@
 - 决议文件固定为 .debug/cleanup_decisions.json（离线规则分析产物，非配置）。
 - 复用 inventory_scan 插件的 DriveDiskParser（跨插件导入，同仓库部署）。
 """
-import inspect
 import json
 import os
 import time
@@ -40,6 +39,7 @@ from inventory_scan.parser.drive_disk_parser import DriveDiskParser
 
 from . import disc_cleanup_const
 from .disc_cleanup_config import DiscCleanupConfig
+from .zzz_compat import factory_record_kwargs
 from .disc_cleanup_rules import DiscRules
 from .grid_ops import sort_grids, stable_screenshot
 
@@ -53,9 +53,7 @@ class DiscCleanupApp(ZApplication):
             app_id=disc_cleanup_const.APP_ID,
             op_name=disc_cleanup_const.APP_NAME,
             node_max_retry_times=100000,
-            **({'use_factory_run_record': False}
-                if 'use_factory_run_record' in inspect.signature(ZApplication.__init__).parameters
-                else {}),
+            **factory_record_kwargs(),
         )
         self.config: DiscCleanupConfig = self.ctx.run_context.get_config(
             app_id=disc_cleanup_const.APP_ID,
