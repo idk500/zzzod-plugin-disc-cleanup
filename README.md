@@ -2,7 +2,7 @@
 
 按规则层决策（.debug/cleanup_decisions.json）在仓库内逐盘指纹匹配并标记弃置；余位≥门槛自动跳过，满级盘永不标记。依赖仓库扫描器插件的解析模块。
 
-- 版本：1.0.0（versionCode 1）
+- 版本：1.0.4（versionCode 5）
 - 作者：[idk500](https://github.com/idk500)
 - 仓库：https://github.com/idk500/zzzod-plugin-disc-cleanup
 
