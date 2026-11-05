@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 """基于仓库扫描器封面生成驱动盘清理标记封面"""
 from PIL import Image, ImageDraw, ImageFont
+from pathlib import Path
 import os
 
-SRC = r"/workspace\plugins-src\zzzod-plugin-inventory-scan\inventory_scan\assets\ui\cover.png"
-DST = r"/workspace\plugins-src\zzzod-plugin-disc-cleanup\disc_cleanup\assets\ui\cover.png"
+REPO = Path(__file__).resolve().parents[1]
+
+# 底图与 logo 均为本地素材，不入库；按需用环境变量指定
+SRC = Path(os.environ.get("COVER_SRC", REPO / "assets" / "src" / "cover_base.png"))
+DST = Path(os.environ.get("COVER_DST", REPO / "disc_cleanup" / "assets" / "ui" / "cover.png"))
+if not SRC.is_file():
+    raise SystemExit(
+        "缺少底图：请用环境变量 COVER_SRC 指定一张 600x376 的底图"
+        f"（当前期望 {SRC}）"
+    )
 
 CYAN = (63, 224, 208)
 GRAY = (168, 185, 190)
