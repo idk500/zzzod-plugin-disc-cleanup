@@ -38,6 +38,14 @@ DEFAULT_SET_TYPE = {
     'SoulRock': 'support', 'YunkuiTales': 'support',
     'WhiteWaterBallad': 'support', 'SwingJazz': 'support',
     "Phaethon'sMelody": 'support',
+    # 3.x 新套装: 翻译表未收录时 OCR 中文名原样传递, 直接用中文别名兜底
+    # (2026-11-06 实机 E2E: 12 个盘因未知套装被保留, 均为下列新套)
+    '拂晓行纪': 'output',   # 2以太伤+10% / 4以太暴伤+30%+攻10% (佩洛伊斯/朱鸢)
+    '呼啸沙龙': 'anomaly',  # 2风伤+10% / 4异常精通+50+增伤 (维琳娜)
+    '谶羽之誓': 'anomaly',  # 2异常精通+30 / 4异常精通+50+异常伤15% (蕾米埃尔)
+    '荆棘玫瑰': 'support',  # 2防御+16% / 4增伤+防御C暴击 (克拉蕾)
+    # 灵魂摇滚已在表(31500/SoulRock), 但 OCR 可能出繁体「搖」, 双向兜底
+    '灵魂摇滚': 'support', '灵魂搖滚': 'support',
 }
 
 # 各类型在 4/5/6 号位的"死主词条"（1/2/3 号主词条固定, 不参与判定）
