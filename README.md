@@ -13,9 +13,13 @@
 
 运行产物（可审计）：逐盘日志与汇总进 `.log/log.txt`；标记状态 `​.debug/cleanup_state.json`（即点即存，中断不丢）；结果汇总 `.debug/cleanup_result.json`；标记前后截图 `.debug/mark_debug/`。
 
-- 版本：1.0.4（versionCode 5）
+- 版本：1.0.6（versionCode 7）
 - 作者：[idk500](https://github.com/idk500)
 - 仓库：https://github.com/idk500/zzzod-plugin-disc-cleanup
+
+## 运行产物与主仓 Git 干净承诺（v1.0.6 起）
+
+识别管线 yml 由框架硬编码路径加载（需临时写入一条龙安装目录 `assets/image_analysis_pipelines/`）：进程正常退出自动删除；强杀残留由下次启动清理；旧版残留首次启动自动收编。git 克隆用户跑完一条龙 `git status` 保持干净。
 
 ## 安装
 

@@ -3,8 +3,8 @@
   "name": "驱动盘清理标记",
   "summary": "按规则层决策（.debug/cleanup_decisions.json）在仓库内逐盘指纹匹配并标记弃置；余位≥门槛自动跳过，满级盘永不标记。依赖仓库扫描器插件的解析模块。",
   "cover": "assets/ui/cover.png",
-  "version": "1.0.5",
-  "versionCode": 6,
+  "version": "1.0.6",
+  "versionCode": 7,
   "defaultGroup": true,
   "needNotify": true,
   "author": {

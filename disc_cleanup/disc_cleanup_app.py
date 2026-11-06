@@ -136,7 +136,13 @@ class DiscCleanupApp(ZApplication):
     def _ensure_plugin_assets(self) -> None:
         """插件自带识别管线合并到工作目录 供框架按工作目录路径加载"""
         try:
+            # 2026-11-06 用户反馈：插件产物把主仓 git 弄脏。先清上次强杀残留，
+            # 再注入（全部登记清单），进程退出时 atexit 自动恢复删除。
+            from .plugin_workspace import InjectedAssets
+            self._injected = InjectedAssets('disc_cleanup')
+            self._injected.restore_previous()
             self._copy_plugin_assets()
+            self._injected.register_exit_cleanup()
         except Exception as e:
             # 真·只读安装/杀软锁定等环境问题:不裸崩,记录后继续(管线缺失会导致识别降级,但应用仍可启动)
             log.error(f'插件资产合并失败(识别功能可能降级),请检查工作目录 assets 写权限: {e}')
@@ -155,6 +161,10 @@ class DiscCleanupApp(ZApplication):
             target = dst_pipelines / yml.name
             if not target.exists():
                 shutil.copy2(yml, target)
+                # 框架硬编码从工作目录加载管线（cv_service.PIPELINE_DIR），只能注入；
+                # 登记后进程退出时删除，git 保持干净
+                if getattr(self, '_injected', None) is not None:
+                    self._injected.register_create(f'assets/image_analysis_pipelines/{yml.name}')
 
     # ---------- 节点 ----------
 
